@@ -11,20 +11,20 @@
 // });
 
 
-// var MongoClient = require("mongodb").MongoClient;
+var MongoClient = require("mongoos").MongoClient;
 
-// var connectionString = "mongodb://localhost:27017/";
+var connectionString = "mongodb://localhost:27017/";
 
-// console.log("Attempting to connect to MongoDB...");
+console.log("Attempting to connect to MongoDB...");
 
-// MongoClient.connect(connectionString, function(err, clientObj) {
-//     if (err) {
-//         console.error("Error connecting to MongoDB:", err.message);
-//     } else {
-//         console.log("Connected Successfully..");
-//         client.close();  // Close the connection after successful connection
-//     }
-// });
+MongoClient.connect(connectionString, function(err, clientObj) {
+    if (err) {
+        console.error("Error connecting to MongoDB:", err.message);
+    } else {
+        console.log("Connected Successfully..");
+        client.close();  // Close the connection after successful connection
+    }
+});
 // var MongoClient = require("mongodb").MongoClient;
 
 // var connectionString = "mongodb://127.0.0.1:27017";
@@ -108,34 +108,72 @@
 // });
 // console.log("Stage 3 Completed");
 
-var mongoClient = require("mongodb").MongoClient;
-console.log("Stage 1 Completed");
+// var mongoClient = require("mongodb").MongoClient;
+// console.log("Stage 1 Completed");
 
-var connectionString = "mongodb://127.0.0.1:27017";
-console.log("Stage 2 Completed");
+// var connectionString = "mongodb://127.0.0.1:27017";
+// console.log("Stage 2 Completed");
 
-mongoClient.connect(connectionString, function(err, clientObj) {
-  if (err) {
-    console.log("Connection Error: " + err.message);
-    return;
-  }
-  console.log("Stage 3 Completed - Connected to Database");
+// mongoClient.connect(connectionString, function(err, clientObj) {
+//   if (err) {
+//     console.log("Connection Error: " + err.message);
+//     return;
+//   }
+//   console.log("Stage 3 Completed - Connected to Database");
 
-  var dbo = clientObj.db("productDB");
-  dbo.collection("tblcategories").find().toArray(function(err, documents) {
-    if (err) {
-      console.log("Query Error: " + err);
-    } else {
-      console.log("Stage 4 Completed - Retrieved documents: ", documents);
-    }
-    clientObj.close(function(closeErr) {
-      if (closeErr) {
-        console.log("Close Connection Error: " + closeErr);
-      } else {
-        console.log("Database connection closed");
-      }
-    });
-  });
-});
+//   var dbo = clientObj.db("productDB");
+//   dbo.collection("tblcategories").find().toArray(function(err, documents) {
+//     if (err) {
+//       console.log("Query Error: " + err);
+//     } else {
+//       console.log("Stage 4 Completed - Retrieved documents: ", documents);
+//     }
+//     clientObj.close(function(closeErr) {
+//       if (closeErr) {
+//         console.log("Close Connection Error: " + closeErr);
+//       } else {
+//         console.log("Database connection closed");
+//       }
+//     });
+//   });
+// });
 
-console.log("Stage 3 Completed");
+// console.log("Stage 3 Completed");
+
+
+//this is progrma find data  form api and create own api in down side
+
+// var express = require ("express");
+// var app = express();
+// app.get('/', function(req, res){
+//   res.send("<h2>API |HOME </h2>");
+
+// });
+// app.get('/products', function(req, res){
+//   res.send([{'Name': 'TV', 'Price':6000},{'Name':'Mobile', 'Price':4545}]);
+
+
+
+// })
+// app.get('/details/:id/:name/:price',function(req,res){
+//   res.send(`Product Id :${req.params.id}<br>
+//             Name: ${req.params.name}<br>
+//             Price: ${req.params.price}`
+//             );
+// });
+
+// app.listen(3030);
+// console.log(`Server started: http://127.0.0.1:3030`);
+
+
+//Now  Here we learn about how get data from onw api from server side.
+
+// var express = require("express");
+// var app = express();
+// app.get('/', function (req, res) {
+//   res.send("<h2>API |HOME </h2>");
+
+// });
+
+// app.listen(3030);
+// console.log(`Server started: http://127.0.0.1:3030`);

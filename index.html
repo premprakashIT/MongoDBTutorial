@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <title>Project Using MERN Stack Concept</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function() {
+            $("#btnRegister").click(function(event) {
+                event.preventDefault();  // Prevent default form submission
+                var customerData = {
+                    "UserId": $("#UserId").val(),
+                    "UserName": $("#UserName").val(),
+                    "Password": $("#Password").val(),
+                    "Email": $("#Email").val(),
+                    "Mobile": $("#Mobile").val()
+                };
+                $.ajax({
+                    method: "POST",
+                    url: "http://localhost:3000/customers",
+                    contentType: "application/json",
+                    data: JSON.stringify(customerData)  // Convert customerData to JSON string
+                })
+                .done(function() {
+                    alert("Register Successfully.");
+                    location.href = "login.html";
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    alert("Error: " + textStatus + " " + errorThrown);
+                });
+
+            });
+            $("#UserId").keyup(function(){
+                var userId = $("#UserId").val();
+                $.ajax({
+                    method:"GET",
+                    url:"http://localhost:3000/customers"
+                })
+                // .then(function(data){
+                //     $.each(data, function(key, customer){
+                //         if(customer.UserId==userId){
+                //             $("#userError").html("User id taken...!")
+                //             return;
+                //         }
+                //         else{
+                //             $("#userError").html("User id available");
+                //         }
+                //     })
+                // })
+                .then(function(data){
+                    for(var item of data){
+                        if(item.UserId==userId){
+                            $("#userError").html("User Exits Already!").css('color','red');
+                            break;
+                        }else{
+                            $("#userError").html("User Id Availabe").css('color','green');;
+                        }
+                    }
+                })
+            })
+        });
+    </script>
+</head>
+<body class="container-fluid">
+    <h2 class="bg-dark text-white text-center mt-3 p-4">Shopping Online</h2>
+    <form>
+        <dl>
+            <dt>User ID</dt>
+            <dd><input type="text" name="UserId" id="UserId"></dd>
+            <dd id="userError"></dd>
+            <dt>User Name</dt>
+            <dd><input type="text" name="UserName" id="UserName"></dd>
+            <dt>Password</dt>
+            <dd><input type="password" name="Password" id="Password"></dd>
+            <dt>Email</dt>
+            <dd><input type="email" name="Email" id="Email"></dd>
+            <dt>Mobile Number</dt>
+            <dd><input type="text" name="Mobile" id="Mobile"></dd>
+        </dl>
+        <button class="btn btn-primary" id="btnRegister">Register</button>
+    </form>
+</body>
+</html>
+
+<!-- <!doctype html>
+<html>
+<head>
+    <title>Project Using MERN stack concept</title>
+    
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function(){
+            $("#btnRegister").click(function(event){
+                event.preventDefault(); // Prevent form from submitting normally
+                var customerData = {
+                    "UserId" :$("#UserId").val(),
+                    "UserName" : $("#UserName").val(),
+                    "Password" : $("#Password").val(),
+                    "Email" : $("#Email").val(),
+                    "Mobile": $("#Mobile").val()
+                };
+                $.ajax({
+                    method: "POST",
+                    url:"http://localhost:3000/customers",
+                    contentType: "application/json", // Add content type
+                    data: JSON.stringify(customerData) // Convert data to JSON string
+                })
+                .done(function(){
+                    alert("Register Successfully.");
+                    location.href="login.html";
+                })
+                .fail(function(xhr, status, error) {
+                    console.error("Error: " + status + " " + error);
+                    alert("Registration failed.");
+                });
+            });
+        });
+    </script>
+</head>
+<body class="container-fluid">
+    <h2 class="bg-dark text-white text-center mt-3 p-4">Shopping Online</h2>
+    <form>
+        <dl>
+            <dt>User ID</dt>
+            <dd><input type="text" name="UserId" id="UserId"></dd>
+            <dt>User Name</dt>
+            <dd><input type="text" name="UserName" id="UserName"></dd>
+            <dt>Password</dt>
+            <dd><input type="password" name="Password" id="Password"></dd>
+            <dt>Email</dt>
+            <dd><input type="email" name="Email" id="Email"></dd>
+            <dt>Mobile Number</dt>
+            <dd><input type="text" name="Mobile" id="Mobile"></dd>
+        </dl>
+        <button class="btn btn-primary" id="btnRegister">Register</button>
+    </form>
+</body>
+</html> -->
+
+<!-- <!doctype html>
+<head>
+    <title>Project Using MERN stack concept</title>
+    
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function(){
+            $("#btnRegister").click(function(){
+                var customerData = {
+                    "UserId" :$("#UserId").val(),
+                    "UserName" : $("#UserName").val(),
+                    "Password" : $("#Password").val(),
+                    "Email" : $("#Email").val(),
+                    "Mobile": $("#Mobile").val()
+                };
+                $.ajax({
+                    method: "POST",
+                    url:"http://localhost:3000/customers",
+                    data:customerData
+                })
+                .then(function(){
+                    alert("Register Successfully.");
+                    location.href="login.html";
+                })
+            })
+        }
+    </script>
+
+</head>
+<body class="container-fluid">
+    <h2 class="bg-dark text-white text-center mt-3 p-4">Shoping Online</h2>
+    <form>
+        <dl>
+            <dt>User ID</dt>
+            <dd><input type="text" name="UserId" id="UserId"</dd>
+            <dt>User Name</dt>
+            <dd><input type="text" name="UserName" id="UserName"</dd>
+            <dt>Password</dt>
+            <dd><input type="password" name="Password" id="Password"</dd>
+            <dt>Email</dt>
+            <dd><input type="email" name="Email" id="Email"</dd>
+            <dt>Mobile Number</dt>
+            <dd><input type="text" name="Mobile" id="Mobile"</dd>
+        </dl>
+        <button class="btn btn-primary" id="btnRegister">Register</button>
+    </form>
+   
+
+</body> -->
